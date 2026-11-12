@@ -52,6 +52,12 @@ mcast_snooping_enabled(const struct mcast_snooping *ms)
 }
 
 bool
+mcast_snooping_ipv6_enabled(const struct mcast_snooping *ms)
+{
+   return ms->ipv6_mcast_snooping;
+}
+
+bool
 mcast_snooping_flood_unreg(const struct mcast_snooping *ms)
 {
     return ms->flood_unreg;
@@ -277,6 +283,20 @@ mcast_snooping_set_flood_unreg(struct mcast_snooping *ms, bool enable)
 {
     bool prev = ms->flood_unreg;
     ms->flood_unreg = enable;
+    return prev != enable;
+}
+
+
+/* Enable/disable IPv6 multicast snooping.
+ *
+ * Returns true if previous state differs from current state,
+ * false otherwise. */
+bool
+mcast_snooping_set_ipv6_mcast_snooping_toggle(struct mcast_snooping *ms, bool enable)
+    OVS_REQ_WRLOCK(ms->rwlock)
+{
+    bool prev = ms->ipv6_mcast_snooping;
+    ms->ipv6_mcast_snooping = enable;
     return prev != enable;
 }
 

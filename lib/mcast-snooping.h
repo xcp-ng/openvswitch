@@ -150,12 +150,16 @@ struct mcast_snooping {
      * ports, otherwise send them to ports connected to multicast routers. */
     bool flood_unreg;
 
+    /* If true, enable IPv6 multicast snooping */
+    bool ipv6_mcast_snooping;
+
     struct ovs_refcount ref_cnt;
     struct ovs_rwlock rwlock;
 };
 
 /* Basics. */
 bool mcast_snooping_enabled(const struct mcast_snooping *ms);
+bool mcast_snooping_ipv6_enabled(const struct mcast_snooping *ms);
 bool mcast_snooping_flood_unreg(const struct mcast_snooping *ms);
 int mcast_mrouter_age(const struct mcast_snooping *ms,
                       const struct mcast_mrouter_bundle *m);
@@ -176,6 +180,9 @@ void mcast_snooping_set_max_entries(struct mcast_snooping *ms,
     OVS_REQ_WRLOCK(ms->rwlock);
 bool
 mcast_snooping_set_flood_unreg(struct mcast_snooping *ms, bool enable)
+    OVS_REQ_WRLOCK(ms->rwlock);
+bool
+mcast_snooping_set_ipv6_mcast_snooping_toggle(struct mcast_snooping *ms, bool enable)
     OVS_REQ_WRLOCK(ms->rwlock);
 void mcast_snooping_set_port_flood(struct mcast_snooping *ms, void *port,
                                    bool flood)

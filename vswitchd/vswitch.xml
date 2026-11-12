@@ -2558,6 +2558,12 @@
           unconditionally forwarded to the specific port.
         </p>
       </column>
+      <column name="other_config" key="enable-ipv6-mcast-snooping"
+              type='{"type": "boolean"}'>
+        <p>
+          If set to <code>true</code>, enable IPv6 multicast snooping.
+        </p>
+      </column>
       <column name="other_config" key="mcast-snooping-flood-reports"
               type='{"type": "boolean"}'>
         <p>

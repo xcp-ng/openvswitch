@@ -2346,6 +2346,8 @@ bridge_configure_mcast_snooping(struct bridge *br)
 
         br_s.flood_unreg = !smap_get_bool(
             oc, "mcast-snooping-disable-flood-unregistered", false);
+        br_s.ipv6_mcast_snooping = smap_get_bool(
+            oc, "enable-ipv6-mcast-snooping", true);
 
         /* Configure multicast snooping on the bridge */
         if (ofproto_set_mcast_snooping(br->ofproto, &br_s)) {

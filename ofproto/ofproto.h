@@ -203,6 +203,7 @@ struct ofproto_mcast_snooping_settings {
     unsigned int idle_time;     /* Entry is removed after the idle time
                                  * in seconds. */
     unsigned int max_entries;   /* Size of the multicast snooping table. */
+    bool ipv6_mcast_snooping;   /* If true, enable IPv6 multicast snooping */
 };
 
 struct ofproto_mcast_snooping_port_settings {

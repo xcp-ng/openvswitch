@@ -3252,7 +3252,9 @@ xlate_normal(struct xlate_ctx *ctx)
     if (mcast_snooping_enabled(ctx->xbridge->ms)
         && !eth_addr_is_broadcast(flow->dl_dst)
         && eth_addr_is_multicast(flow->dl_dst)
-        && is_ip_any(flow)) {
+        && is_ip_any(flow)
+        && ((flow->dl_type != htons(ETH_TYPE_IPV6))
+            || mcast_snooping_ipv6_enabled(ctx->xbridge->ms))) {
         struct mcast_snooping *ms = ctx->xbridge->ms;
         struct mcast_group *grp = NULL;
 

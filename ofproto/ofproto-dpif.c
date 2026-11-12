@@ -3936,6 +3936,9 @@ set_mcast_snooping(struct ofproto *ofproto_,
         if (mcast_snooping_set_flood_unreg(ofproto->ms, s->flood_unreg)) {
             ofproto->backer->need_revalidate = REV_RECONFIGURE;
         }
+        if (mcast_snooping_set_ipv6_mcast_snooping_toggle(ofproto->ms, s->ipv6_mcast_snooping)) {
+            ofproto->backer->need_revalidate = REV_RECONFIGURE;
+        }
         ovs_rwlock_unlock(&ofproto->ms->rwlock);
     } else {
         mcast_snooping_unref(ofproto->ms);
