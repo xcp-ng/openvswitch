@@ -30,6 +30,12 @@ datadir=${OVS_PKGDATADIR-'@pkgdatadir@'}        # /usr/share/openvswitch
 bindir=${OVS_BINDIR-'@bindir@'}                 # /usr/bin
 sbindir=${OVS_SBINDIR-'@sbindir@'}              # /usr/sbin
 
+# Set OPENSSL_ENABLE_MD5_VERIFY=1 to ovs to accept MD5 certificates, CRL or OCSP 
+# signatures (depending the current security level), like with an unpatched 
+# OpenSSL.
+OPENSSL_ENABLE_MD5_VERIFY=1
+export OPENSSL_ENABLE_MD5_VERIFY
+
 # /etc/openvswitch or /var/lib/openvswitch
 if test X"$OVS_DBDIR" != X; then
     dbdir=$OVS_DBDIR
